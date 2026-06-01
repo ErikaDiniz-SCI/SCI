@@ -333,7 +333,14 @@
   <button class="nav-btn" onclick="showSection('revisor')" id="nav-revisor">
     <span class="nav-icon">🔎</span> Revisor
   </button>
-
+  <div class="sidebar-label" style="margin-top:6px">Documentos</div>
+  <button class="nav-btn" onclick="showSection('regras')" id="nav-regras">
+    <span class="nav-icon">👑</span> Regras de Ouro
+  </button>
+ <div class="sidebar-label" style="margin-top:6px">Documentos</div>
+  <button class="nav-btn" onclick="showSection('regras')" id="nav-regras">
+    <span class="nav-icon">👑</span> Regras de Ouro
+  </button>
   <div class="sidebar-footer">
     SCI · Cartilha de Uso · JAD + PIP<br>
     Março de 2026<br><br>
@@ -455,9 +462,27 @@
           <tr><td colspan="2"><span class="badge badge-done">Concluído</span></td><td>Relatório assinado por todos. PIP encerrado</td></tr>
         </tbody>
       </table>
-
+ <!-- REGRAS DE OURO -->
+    <div class="section-page" id="page-regras">
+      <div class="sec-title">👑 Regras de Ouro do SCI</div>
+      <div class="callout callout-info" style="background: #0d2240; color: white; border-left-color: #f0a000;">
+        <strong style="font-size: 18px;">Princípio Fundamental do SCI</strong><br>
+        O sistema pode simplificar, automatizar e acelerar atividades, mas nunca pode contrariar a legislação, os normativos aplicáveis ou as garantias do processo correcional.
+      </div>
+      <div class="gloss-grid" style="grid-template-columns: 1fr;">
+        <div class="gloss-item"><div class="gloss-term">1. A legislação prevalece sobre o sistema</div><div class="gloss-def">O SCI é uma ferramenta de apoio à atividade correcional. Nenhuma funcionalidade substitui a legislação.</div></div>
+        <div class="gloss-item"><div class="gloss-term">2. O sistema organiza, mas não realiza a análise</div><div class="gloss-def">A responsabilidade pela análise técnica permanece com os agentes públicos.</div></div>
+        <div class="gloss-item"><div class="gloss-term">3. Toda conclusão deve possuir fundamentação</div><div class="gloss-def">Nenhuma recomendação sem motivação adequada e registro.</div></div>
+        <div class="gloss-item"><div class="gloss-term">4. Fato com elementos mínimos</div><div class="gloss-def">A descrição do fato deve permitir compreensão clara por terceiros.</div></div>
+        <div class="gloss-item"><div class="gloss-term">5. Evidências não substituem análise</div><div class="gloss-def">Documentos anexados precisam de análise técnica correspondente.</div></div>
+        <div class="gloss-item"><div class="gloss-term">6. Rastreabilidade obrigatória</div><div class="gloss-def">Toda ação deve ser passível de identificação e auditoria.</div></div>
+        <div class="gloss-item"><div class="gloss-term">7. Histórico deve refletir a realidade</div><div class="gloss-def">Registros devem representar fielmente os atos praticados.</div></div>
+        <div class="gloss-item"><div class="gloss-term">8. Perfis definem responsabilidades</div><div class="gloss-def">Cada perfil possui atribuições específicas.</div></div>
+        <div class="gloss-item"><div class="gloss-term">9. Assinar significa concordar</div><div class="gloss-def">Assinatura eletrônica = responsabilidade pelo conteúdo.</div></div>
+        <div class="gloss-item"><div class="gloss-term">10. Simplificação sem ilegalidade</div><div class="gloss-def">Automações não podem contrariar a legislação ou garantias processuais.</div></div>
+      </div>
+    </div>
     </div><!-- /geral -->
-
 
     <!-- ══════════════════════════════
          APOIO À AUTORIDADE
@@ -1325,6 +1350,7 @@
     gestor:     ['Gestor Correcional',     '· JAD + PIP'],
     analista:   ['Analista / Investigador','· JAD + PIP'],
     revisor:    ['Revisor',                '· JAD + PIP'],
+    regras:     ['Regras de Ouro',         '· Princípios fundamentais'],
   };
 
   function showSection(id) {
