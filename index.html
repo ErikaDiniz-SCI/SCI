@@ -405,8 +405,8 @@
           <tr><td>2</td><td>Autoridade Correcional</td><td>Analisa e encaminha a demanda</td><td><em>JAD criado (Aguardando distribuição)</em></td></tr>
           <tr><td>3</td><td>Gestor Correcional</td><td>Distribui o JAD para um analista</td><td><em>JAD atribuído</em></td></tr>
           <tr><td>4</td><td>Analista</td><td>Cadastra fatos, envolvidos, evidências; elabora análise e fundamentação</td><td><em>JAD enviado ao Revisor</em></td></tr>
-          <tr><td>5</td><td>Revisor JAD</td><td>Revisa a análise. Aprova ou devolve</td><td><em>JAD enviado ao Gestor</em></td></tr>
-          <tr><td>6</td><td>Gestor Correcional</td><td>Revisa o parecer. Aprova ou devolve</td><td><em>JAD enviado à Autoridade</em></td></tr>
+          <tr><td>5</td><td>Revisor JAD</td><td>Revisa a análise. Aprova ou devolve</td><td><em>JAD enviado ao Gestor ou devolvido ao analista</em></td></tr>
+          <tr><td>6</td><td>Gestor Correcional</td><td>Revisa o parecer. Aprova ou devolve</td><td><em>JAD enviado à Autoridade ou devolvido ao analista</em></td></tr>
           <tr><td>7</td><td>Autoridade Correcional</td><td>Aprova ou devolve. Inicia ciclo de assinaturas (Analista → Revisor → Gestor → Autoridade)</td><td><em>Assinaturas em curso</em></td></tr>
           <tr><td>8</td><td>Autoridade Correcional</td><td>Assinatura final</td><td><em>Processo retorna ao Analista para finalização</em></td></tr>
           <tr><td>9</td><td>Analista</td><td>Finaliza o JAD no sistema</td><td><em>Processo encerrado → cai na caixa do Apoio</em></td></tr>
@@ -454,14 +454,14 @@
       <table class="flow-table">
         <thead><tr><th colspan="2">Status</th><th>Significa</th></tr></thead>
         <tbody>
-          <tr><td colspan="2"><span class="badge badge-wait">Aguardando Despacho</span></td><td>PIP instaurado pela Autoridade. Apoio ainda não iniciou o despacho</td></tr>
+          <tr><td colspan="2"><span class="badge badge-wait">Aguardando Despacho</span></td><td>Autoridade determinou a instauração do PIP. Apoio precisa elaborar o despacho de instauração</td></tr>
           <tr><td colspan="2"><span class="badge badge-blue">Em cadastro</span></td><td>Investigador iniciou o registro de fatos e diligências</td></tr>
           <tr><td colspan="2"><span class="badge badge-blue">Em análise</span></td><td>Cadastro concluído. Investigador na fase de análise técnica</td></tr>
           <tr><td colspan="2"><span class="badge badge-blue">Em revisão — Revisor</span></td><td>Análise concluída e enviada ao Revisor</td></tr>
           <tr><td colspan="2"><span class="badge badge-blue">Em revisão — Gestor</span></td><td>Aprovado pelo Revisor, agora com o Gestor</td></tr>
           <tr><td colspan="2"><span class="badge badge-blue">Em revisão — Autoridade</span></td><td>Aprovado pelo Gestor, agora com a Autoridade</td></tr>
           <tr><td colspan="2"><span class="badge badge-wait">Aguardando assinaturas</span></td><td>Aprovado pela Autoridade. Aguardando ciclo de assinaturas</td></tr>
-          <tr><td colspan="2"><span class="badge badge-wait">Aguardando registro no SEI</span></td><td>Autoridade assinou instauração. Apoio precisa autuar no SEI</td></tr>
+          <tr><td colspan="2"><span class="badge badge-wait">Aguardando registro no SEI</span></td><td>Despacho assinado pela Autoridade. Apoio deve autuar o processo no SEI e registrar o número</td></tr>
           <tr><td colspan="2"><span class="badge badge-done">Concluído</span></td><td>Relatório assinado por todos. PIP encerrado</td></tr>
         </tbody>
       </table>
@@ -475,16 +475,15 @@
         O sistema pode simplificar, automatizar e acelerar atividades, mas nunca pode contrariar a legislação, os normativos aplicáveis ou as garantias do processo correcional.
       </div>
       <div class="gloss-grid" style="grid-template-columns: 1fr;">
-        <div class="gloss-item"><div class="gloss-term">1. A legislação prevalece sobre o sistema</div><div class="gloss-def">O SCI é uma ferramenta de apoio à atividade correcional. Nenhuma funcionalidade substitui a legislação.</div></div>
+        <div class="gloss-item"><div class="gloss-term">1. A legislação prevalece sobre o sistema</div><div class="gloss-def">O SCI é uma ferramenta de apoio à atividade correcional. Suas funcionalidades refletem os procedimentos previstos na legislação, que permanece como referência principal para a atuação dos usuários.</div></div>
         <div class="gloss-item"><div class="gloss-term">2. O sistema organiza, mas não realiza a análise</div><div class="gloss-def">A responsabilidade pela análise técnica permanece com os agentes públicos.</div></div>
-        <div class="gloss-item"><div class="gloss-term">3. Toda conclusão deve possuir fundamentação</div><div class="gloss-def">Nenhuma recomendação sem motivação adequada e registro.</div></div>
+        <div class="gloss-item"><div class="gloss-term">3. Toda conclusão deve possuir fundamentação</div><div class="gloss-def">Toda conclusão deve estar devidamente fundamentada, com indicação dos elementos que a sustentam. Não devem ser emitidas recomendações sem motivação adequada e registro correspondente.</div></div>
         <div class="gloss-item"><div class="gloss-term">4. Fato com elementos mínimos</div><div class="gloss-def">A descrição do fato deve permitir compreensão clara por terceiros.</div></div>
         <div class="gloss-item"><div class="gloss-term">5. Evidências não substituem análise</div><div class="gloss-def">Documentos anexados precisam de análise técnica correspondente.</div></div>
-        <div class="gloss-item"><div class="gloss-term">6. Rastreabilidade obrigatória</div><div class="gloss-def">Toda ação deve ser passível de identificação e auditoria.</div></div>
-        <div class="gloss-item"><div class="gloss-term">7. Histórico deve refletir a realidade</div><div class="gloss-def">Registros devem representar fielmente os atos praticados.</div></div>
+        <div class="gloss-item"><div class="gloss-term">6. Rastreabilidade obrigatória</div><div class="gloss-def">O sistema registra automaticamente todas as ações realizadas (logs de acesso, edições, envios e assinaturas), garantindo a rastreabilidade. O usuário deve evitar práticas que comprometam esse registro, como edições indevidas ou exclusão de informações sem justificativa.</div></div>
+        <div class="gloss-item"><div class="gloss-term">7. Histórico deve refletir a realidade</div><div class="gloss-def">O sistema registra as informações inseridas pelos usuários. Cabe a cada usuário garantir que os registros reflitam fielmente os atos praticados, inserindo dados corretos e completos, e utilizando os campos de justificativa quando houver necessidade de correção ou retificação.</div></div>
         <div class="gloss-item"><div class="gloss-term">8. Perfis definem responsabilidades</div><div class="gloss-def">Cada perfil possui atribuições específicas.</div></div>
         <div class="gloss-item"><div class="gloss-term">9. Assinar significa concordar</div><div class="gloss-def">Assinatura eletrônica = responsabilidade pelo conteúdo.</div></div>
-        <div class="gloss-item"><div class="gloss-term">10. Simplificação sem ilegalidade</div><div class="gloss-def">Automações não podem contrariar a legislação ou garantias processuais.</div></div>
       </div>
     </div>
     
@@ -613,7 +612,7 @@
       <div class="tab-panel active" id="panel-apoio-jad">
         <div class="persona-intro-box">
           <span class="persona-tag">Apoio à Autoridade · JAD</span>
-          <p>Responsável por registrar no SCI toda denúncia, ofício ou comunicação que chegue ao órgão imputando irregularidade a agente público. Sem esse registro, a denúncia não existe para o sistema. Ao final do ciclo, realiza o download da nota técnica assinada e autua o processo no SEI.</p>
+          <p>Responsável por registrar no SCI toda denúncia, ofício ou comunicação que chegue ao órgão imputando irregularidade a agente público ou ente privado. Sem esse registro, a denúncia não existe para o sistema. Ao final do ciclo, realiza o download da nota técnica assinada e autua o processo no SEI.</p>
         </div>
         <div class="access-box">🔗 sci.cg.df.gov.br &nbsp;·&nbsp; Login e Senha PARTICIPA</div>
 
@@ -634,7 +633,7 @@
             <div class="step-body">
               <div class="step-title">Preencher os Dados da Demanda</div>
               <ul>
-                <li><strong>Documento/Processo vinculado</strong> (opcional): número SEI relacionado</li>
+                <li><strong>Documento/Processo vinculado</strong> (opcional): número do processo SEI já existente que deu origem à demanda (ex.: processo de uma denúncia que já tramita no SEI). Caso a demanda ainda não tenha processo SEI, deixe em branco.</li>
                 <li><strong>Tipo de documento</strong> (obrigatório): Denúncia, Ofício, Carta, Circular etc.</li>
                 <li><strong>Origem da Demanda</strong> (obrigatório): ex. Ouvidoria Geral do DF, MPDFT</li>
                 <li><strong>Documento Origem</strong> (obrigatório): número do documento (ex.: OUV-070846/2026)</li>
@@ -925,7 +924,7 @@
               <table class="decision-table" style="margin-top:8px">
                 <thead><tr><th>Opção</th><th>Quando usar</th></tr></thead>
                 <tbody>
-                  <tr><td>→ Juízo de Admissibilidade</td><td>Conduta de agente público</td></tr>
+                  <tr><td>→ Juízo de Admissibilidade</td><td>Conduta de agente público e/ou ente privado</td></tr>
                   <tr><td>→ Triagem TCE</td><td>Indícios de dano ao erário</td></tr>
                   <tr><td>→ Ambos</td><td>Conduta funcional + recursos públicos</td></tr>
                 </tbody>
