@@ -1,0 +1,210 @@
+from PIL import Image, ImageDraw, ImageFont
+
+def generate_definitive_eap():
+    # Dimensões massivas para garantir legibilidade de tudo
+    width = 4500
+    height = 5000
+    bg_color = (255, 255, 255)
+    img = Image.new('RGB', (width, height), bg_color)
+    draw = ImageDraw.Draw(img)
+    
+    # Cores
+    color_level1 = (196, 30, 58)
+    color_level2 = (76, 175, 80)
+    color_level3 = (255, 193, 7)
+    color_level4 = (255, 236, 179) # Amarelo bem claro para Nível 4
+    text_color_white = (255, 255, 255)
+    text_color_dark = (33, 33, 33)
+    line_color = (0, 0, 0)
+    dash_color = (180, 180, 180)
+    
+    try:
+        font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        font_title = ImageFont.truetype(font_path, 60)
+        font_bold = ImageFont.truetype(font_path, 40)
+        font_reg = ImageFont.truetype(font_path, 28)
+        font_small = ImageFont.truetype(font_path, 22)
+        font_tiny = ImageFont.truetype(font_path, 18)
+    except:
+        font_title = font_bold = font_reg = font_small = font_tiny = ImageFont.load_default()
+
+    def draw_dashed_line(y):
+        dash_length = 30
+        for x in range(150, width - 300, dash_length * 2):
+            draw.line([(x, y), (x + dash_length, y)], fill=dash_color, width=4)
+
+    def draw_box(x, y, w, h, text, color, text_color, font):
+        draw.rectangle([x, y, x + w, y + h], fill=color, outline=(0, 0, 0), width=3)
+        lines = text.split('\n')
+        line_heights = [font.getbbox(l)[3] - font.getbbox(l)[1] for l in lines]
+        total_h = sum(line_heights) + (len(lines)-1)*12
+        curr_y = y + (h - total_h) / 2
+        for line in lines:
+            bbox = font.getbbox(line)
+            tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+            draw.text((x + (w - tw) / 2, curr_y), line, fill=text_color, font=font)
+            curr_y += th + 12
+
+    # Dados Completos da EAP do PDF
+    eap = [
+        {
+            "module": "1. CONFIGURAÇÃO\nTRANSVERSAL",
+            "subs": [
+                {"name": "1.1 Gestão Org.", "pkgs": ["1.1.1 Cadastro Órgãos", "1.1.2 Cadastro Unid.", "1.1.3 Estru. Hierárquica"]},
+                {"name": "1.2 Gestão Usuários", "pkgs": ["1.2.1 Cadastro Usuários", "1.2.2 Gestão Autorid.", "1.2.3 Gestão Vínculos"]},
+                {"name": "1.3 Gestão Perfis", "pkgs": ["1.3.1 Definição Perfis", "1.3.2 Regras Permis.", "1.3.3 Trilhas Audit."]},
+                {"name": "1.4 Parametrização", "pkgs": ["1.4.1 Parâm. Gerais", "1.4.2 Modelos Doc.", "1.4.3 Tabelas Ref."]},
+                {"name": "1.5 Segurança", "pkgs": ["1.5.1 Acesso p/ Órgão", "1.5.2 Acesso p/ Perfil", "1.5.3 Trilhas Audit."]}
+            ]
+        },
+        {
+            "module": "2. MÓDULO\nDEMANDA",
+            "subs": [
+                {"name": "2.1 Recebimento", "pkgs": ["2.1.1 Cad. Demanda", "2.1.2 Validação Inic."]},
+                {"name": "2.2 Análise", "pkgs": ["2.2.1 Classificação", "2.2.2 Complem. Info."]},
+                {"name": "2.3 Tratamento", "pkgs": ["2.3.1 Encaminhamento", "2.3.2 Encerramento"]}
+            ]
+        },
+        {
+            "module": "3. MÓDULO\nJAD",
+            "subs": [
+                {"name": "3.1 Distribuição", "pkgs": ["3.1.1 Distrib. Proc."]},
+                {"name": "3.2 Instrução JAD", "pkgs": ["3.2.1 Cad. e Registro", "3.2.2 Análise Prelim.", "3.2.3 Revisão Técnica", "3.2.4 Emissão Nota"]},
+                {"name": "3.3 Formalização", "pkgs": ["3.3.1 Assinat. Eletr."]}
+            ]
+        },
+        {
+            "module": "4. MÓDULO\nPIP",
+            "subs": [
+                {"name": "4.1 Instauração", "pkgs": ["4.1.1 Design. Resp.", "4.1.2 Cadastro PIP", "4.1.3 Gestão Dilig."]},
+                {"name": "4.2 Instrução", "pkgs": ["4.2.1 Investigação", "4.2.3 Elab. Relatório", "4.2.4 Revisão Técnica"]},
+                {"name": "4.3 Conclusão", "pkgs": ["4.3.1 Relat. Conclus.", "4.3.2 Assinaturas"]}
+            ]
+        },
+        {
+            "module": "5. PAINEL\nGERENCIAL",
+            "subs": [
+                {"name": "5.1 Indicadores", "pkgs": ["5.1.1 Def. Indicad.", "5.1.2 Cálculo Indicad."]},
+                {"name": "5.2 Dashboards", "pkgs": ["5.2.1 Criação Dash.", "5.2.2 Atualiz. Autom."]},
+                {"name": "5.3 Consultas", "pkgs": ["5.3.1 Filtros e Cons.", "5.3.2 Export. Relat."]}
+            ]
+        },
+        {
+            "module": "6. INTEGRAÇÃO\nPARTICIPA-DF",
+            "subs": [
+                {"name": "6.1 Recepção", "pkgs": ["6.1.1 Recepção Autom.", "6.1.2 Validação Manif."]},
+                {"name": "6.2 Registro", "pkgs": ["6.2.1 Registro Integ.", "6.2.2 Vinc. Órgão"]},
+                {"name": "6.3 Rastreabilidade", "pkgs": ["6.3.1 Rastreabilidade", "6.3.2 Hist. Eventos"]}
+            ]
+        },
+        {
+            "module": "7. MÓDULO\nPAD",
+            "subs": [
+                {"name": "7.1 Instauração", "pkgs": ["7.1.1 Atos Instaur.", "7.1.2 Desig. Comissão", "7.1.3 Cont. Prazos"]},
+                {"name": "7.2 Instrução", "pkgs": ["7.2.1 Atos Proces.", "7.2.2 Instr. e Provas", "7.2.3 Defesa Acus.", "7.2.4 Relat. Final"]},
+                {"name": "7.3 Julgamento", "pkgs": ["7.3.1 Relat. Final", "7.3.2 Decis. e Julg.", "7.3.3 Publ. Decisão"]}
+            ]
+        },
+        {
+            "module": "8. PLATAFORMA\nBI",
+            "subs": [
+                {"name": "8.1 Plataforma", "pkgs": ["8.1.1 Integ. Bases"]},
+                {"name": "8.2 Painéis", "pkgs": ["8.2.1 Desenv. Painéis", "8.2.2 Perfis Acesso"]},
+                {"name": "8.3 Indicadores", "pkgs": ["8.3.1 Def. Indicad.", "8.3.2 Monit. Indicad."]}
+            ]
+        },
+        {
+            "module": "9. MÓDULO\nTAC",
+            "subs": [
+                {"name": "9.1 Instauração", "pkgs": ["9.1.1 Proposição TAC"]},
+                {"name": "9.2 Acomp.", "pkgs": ["9.2.1 Plano Cumprim.", "9.2.2 Exec. Cláusulas"]},
+                {"name": "9.3 Encerramento", "pkgs": ["9.3.1 Encerram. TAC"]}
+            ]
+        },
+        {
+            "module": "11. MÓDULO\nPAR",
+            "subs": [{"name": "11.1 Gestão", "pkgs": ["11.1.1 Lev. Escopo"]}]
+        },
+        {
+            "module": "12. MÓDULO\nTCE",
+            "subs": [{"name": "12.1 Gestão", "pkgs": ["12.1.1 Lev. Escopo"]}]
+        },
+        {
+            "module": "13. INTEGRAÇÃO\nSEI",
+            "subs": [
+                {"name": "13.1 Pesquisa", "pkgs": ["13.1.1 Envio Doc.", "13.1.2 Vinc. Proc."]},
+                {"name": "13.2 Env/Rec", "pkgs": ["13.2.1 Rec. Doc."]},
+                {"name": "13.3 Consulta", "pkgs": ["13.3.1 Cons. Tramit.", "13.3.2 Hist. Movim."]},
+                {"name": "13.4 Atualização", "pkgs": ["13.4.1 Sinc. Situaç.", "13.4.2 Atualiz. Status"]}
+            ]
+        }
+    ]
+
+    # Desenhar Níveis e Rótulos
+    levels_y = [400, 1000, 1600, 2400, 4800]
+    labels = ["NÍVEL 1", "NÍVEL 2", "NÍVEL 3", "NÍVEL 4"]
+    for i, y in enumerate(levels_y):
+        draw_dashed_line(y)
+        if i < 4:
+            draw.text((width - 400, y + 250), labels[i], fill=(0,0,0), font=font_title)
+
+    # NÍVEL 1
+    box_w1, box_h1 = 600, 180
+    x1, y1 = (width - box_w1) / 2, 550
+    draw_box(x1, y1, box_w1, box_h1, "PROJETO\nSCI", color_level1, text_color_white, font_bold)
+    
+    # NÍVEL 2
+    y2 = 1100
+    box_w2, box_h2 = 320, 150
+    gap2 = 30
+    total_w2 = len(eap) * (box_w2 + gap2)
+    start_x2 = (width - total_w2) / 2
+    
+    # Conexão Nível 1 -> 2
+    draw.line([(width/2, y1 + box_h1), (width/2, y2 - 100)], fill=line_color, width=6)
+    draw.line([(start_x2 + box_w2/2, y2 - 100), (start_x2 + (len(eap)-1)*(box_w2+gap2) + box_w2/2, y2 - 100)], fill=line_color, width=6)
+
+    for i, mod in enumerate(eap):
+        mx = start_x2 + i * (box_w2 + gap2)
+        draw_box(mx, y2, box_w2, box_h2, mod["module"], color_level2, text_color_white, font_reg)
+        draw.line([(mx + box_w2/2, y2), (mx + box_w2/2, y2 - 100)], fill=line_color, width=6)
+        
+        # NÍVEL 3 (Subentregas)
+        y3_start = 1700
+        box_w3, box_h3 = 300, 100
+        for j, sub in enumerate(mod["subs"]):
+            sx = mx + 10
+            sy = y3_start + j * 750 # Espaço para o Nível 4 abaixo
+            draw_box(sx, sy, box_w3, box_h3, sub["name"], color_level3, text_color_dark, font_small)
+            # Linha vertical do N2 para N3
+            draw.line([(mx + box_w2/2, y2 + box_h2), (mx + box_w2/2, sy + box_h3/2)], fill=line_color, width=4)
+            draw.line([(mx + box_w2/2, sy + box_h3/2), (sx, sy + box_h3/2)], fill=line_color, width=4)
+            
+            # NÍVEL 4 (Pacotes)
+            y4_start = sy + 150
+            box_w4, box_h4 = 280, 80
+            for k, pkg in enumerate(sub["pkgs"]):
+                px = sx + 10
+                py = y4_start + k * 100
+                draw_box(px, py, box_w4, box_h4, pkg, color_level4, text_color_dark, font_tiny)
+                # Linha do N3 para N4
+                draw.line([(sx + box_w3/2, sy + box_h3), (sx + box_w3/2, py + box_h4/2)], fill=line_color, width=2)
+                draw.line([(sx + box_w3/2, py + box_h4/2), (px, py + box_h4/2)], fill=line_color, width=2)
+
+    # Instruções no topo
+    instrucoes = [
+        "• Cada nível deve detalhar o anterior e, em conjunto, cobrir 100% do escopo.",
+        "• Comece pelo nível 1 (grandes entregas), depois detalhe em nível 2 (subentregas) e assim",
+        "  sucessivamente até detalhar os pacotes de trabalho.",
+        "• E, por fim, lembre-se: liste o que será produzido, não o que será feito."
+    ]
+    curr_y = 80
+    for line in instrucoes:
+        draw.text((width/2 - 600, curr_y), line, fill=(80, 80, 80), font=font_reg)
+        curr_y += 60
+
+    img.save("/home/ubuntu/eap_completa_niveis_1_4.png")
+    print("Imagem definitiva gerada.")
+
+if __name__ == "__main__":
+    generate_definitive_eap()
